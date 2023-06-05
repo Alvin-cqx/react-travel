@@ -16,7 +16,7 @@ export const ProductImage: React.FC<propsType> = ({
 }) => {
     return (
         <div style={{marginRight:10}}>
-            {size == "large" ? (
+            {size === "large" ? (
                 <Image src={imageSrc} height={285} width={"100%"} />
             ) : (
                 <Image src={imageSrc} height={120} width={"100%"} />
