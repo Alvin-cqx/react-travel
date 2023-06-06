@@ -12,7 +12,7 @@ import styles from "./App.module.css";
 // import { productList1, productList2,productList3} from "./mockups";
 // import sideImage from './assets/images/sider_2019_02-04.png'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { HomePage, RegisterPage, SignInPage } from "./pages";
+import { HomePage, RegisterPage, SignInPage,DetailPage} from "./pages";
 function App() {
   return (
     <div className={styles.App}>
@@ -65,6 +65,7 @@ function App() {
           <Route exact path="/" component={HomePage}></Route>
           <Route exact path="/register" component={RegisterPage}></Route>
           <Route exact path="/signIn" component={SignInPage}></Route>
+          <Route exact path="/detail/:detailId" component={DetailPage}></Route>
           {/*   <Route path="/login" render={() => <h1>登录</h1>}></Route>
           /~ 404页面是所有路由最后添加的 ~/
           <Route  render={() => <h1>404页面</h1>}></Route>*/}

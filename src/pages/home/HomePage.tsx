@@ -13,6 +13,7 @@ import sideImage from "../../assets/images/sider_2019_02-04.png";
 
 export class HomePage extends React.Component {
   render(): React.ReactNode {
+    // console.log(this.props,'this.props')
     return (
       <div>
         <Header></Header>
