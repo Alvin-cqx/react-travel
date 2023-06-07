@@ -11,6 +11,9 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
+import store from "../../redux/store";
+import { LanguageState } from "../../redux/languageReducer";
+interface state extends LanguageState {}
 const items: MenuProps["items"] = [
   {
     label: "中文",
@@ -21,9 +24,29 @@ const items: MenuProps["items"] = [
     key: "2",
   },
 ];
-class Header extends React.Component<RouteComponentProps> {
+interface itemType{
+  [propName:string]:any
+}
+class HeaderComp extends React.Component<RouteComponentProps, state> {
+  constructor(props) {
+    super(props);
+    const storeState = store.getState();
+    this.state = {
+      language: storeState.language,
+      languageList: storeState.languageList,
+    };
+   
+  }
   render(): React.ReactNode {
     const { history } = this.props;
+    let items_:itemType=[]
+    this.state.languageList.forEach((item,ind)=>{
+      items_.push({
+        label: item.name,
+        key:item.code,
+      }) 
+    })
+    console.log(items_,'item_listitem_listitem_list')
     return (
       <div className={styles["app-header"]}>
         <div className={styles["top-header"]}>
@@ -77,4 +100,4 @@ class Header extends React.Component<RouteComponentProps> {
   }
 }
 
-export const HeaderClass = withRouter(Header);
+export const Header = withRouter(HeaderComp);
