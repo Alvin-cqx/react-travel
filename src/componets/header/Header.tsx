@@ -4,6 +4,12 @@ import logo from "../../assets/logo.svg";
 import { Layout, Typography, Input, Dropdown, Button, Menu, Space } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
+import {
+  useHistory,
+  useLocation,
+  useParams,
+  useRouteMatch,
+} from "react-router-dom";
 const items: MenuProps["items"] = [
   {
     label: "中文",
@@ -15,6 +21,11 @@ const items: MenuProps["items"] = [
   },
 ];
 export const Header: React.FC = () => {
+  const history = useHistory();
+  // const location=useLocation()
+  // const params=useParams()
+  // const routeMatch=useRouteMatch()
+
   return (
     <div className={styles["app-header"]}>
       <div className={styles["top-header"]}>
@@ -29,8 +40,12 @@ export const Header: React.FC = () => {
             </Button>
           </Dropdown>
           <Space className={styles["button-group"]}>
-            <Button value="small">登录</Button>
-            <Button value="small">注册</Button>
+            <Button value="small" onClick={() => history.push("/signIn")}>
+              登录
+            </Button>
+            <Button value="small" onClick={() => history.push("/register")}>
+              注册
+            </Button>
           </Space>
         </div>
       </div>
