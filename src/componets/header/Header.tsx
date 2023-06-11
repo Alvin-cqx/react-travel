@@ -10,31 +10,47 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
-const items: MenuProps["items"] = [
-  {
-    label: "中文",
-    key: "1",
-  },
-  {
-    label: "英文",
-    key: "2",
-  },
-];
+import { useSelector } from "../../redux/hook";
+import { useDispatch } from "react-redux";
+import { changeLanguageActionCreator } from "../../redux/language/languageAction";
+// const items: MenuProps["items"] = [
+//   {
+//     label: "中文",
+//     key: "1",
+//   },
+//   {
+//     label: "英文",
+//     key: "2",
+//   },
+// ];
 export const Header: React.FC = () => {
   const history = useHistory();
   // const location=useLocation()
   // const params=useParams()
   // const routeMatch=useRouteMatch()
+  const language = useSelector((state) => state.language);
+  const languageList = useSelector((state) => state.languageList);
+  const dispath = useDispatch();
 
+  const itemList: MenuProps["items"] = [];
+  languageList.forEach((item, ind) => {
+    itemList?.push({
+      label: item.name,
+      key: item.code,
+    });
+  });
+  const handleMenuClick = (e: any) => {
+    dispath(changeLanguageActionCreator(e.key));
+  };
   return (
     <div className={styles["app-header"]}>
       <div className={styles["top-header"]}>
         <div className={styles.inner}>
           <Typography.Text>让旅游更幸福</Typography.Text>
-          <Dropdown menu={{ items }}>
+          <Dropdown menu={{ items: itemList, onClick: handleMenuClick }}>
             <Button>
               <Space>
-                语言
+                {language === "zh" ? "中文" : "English"}
                 <DownOutlined />
               </Space>
             </Button>

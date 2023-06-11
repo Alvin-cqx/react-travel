@@ -12,21 +12,21 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import store from "../../redux/store";
-import { LanguageState } from "../../redux/languageReducer";
+import { LanguageState } from "../../redux/language/languageReducer";
 interface state extends LanguageState {}
-const items: MenuProps["items"] = [
-  {
-    label: "中文",
-    key: "1",
-  },
-  {
-    label: "英文",
-    key: "2",
-  },
-];
-interface itemType{
-  [propName:string]:any
-}
+// const items: MenuProps["items"] = [
+//   {
+//     label: "中文",
+//     key: "1",
+//   },
+//   {
+//     label: "英文",
+//     key: "2",
+//   },
+// ];
+// interface itemType{
+//   [propName:string]:any
+// }
 class HeaderComp extends React.Component<RouteComponentProps, state> {
   constructor(props) {
     super(props);
@@ -35,18 +35,17 @@ class HeaderComp extends React.Component<RouteComponentProps, state> {
       language: storeState.language,
       languageList: storeState.languageList,
     };
-   
   }
   render(): React.ReactNode {
     const { history } = this.props;
-    let items_:itemType=[]
-    this.state.languageList.forEach((item,ind)=>{
-      items_.push({
+    const items: MenuProps["items"] = [];
+    this.state.languageList.forEach((item, ind) => {
+      items?.push({
         label: item.name,
-        key:item.code,
-      }) 
-    })
-    console.log(items_,'item_listitem_listitem_list')
+        key: item.code,
+      });
+    });
+
     return (
       <div className={styles["app-header"]}>
         <div className={styles["top-header"]}>
@@ -55,7 +54,7 @@ class HeaderComp extends React.Component<RouteComponentProps, state> {
             <Dropdown menu={{ items }}>
               <Button>
                 <Space>
-                  语言
+                {this.state.language==='zh'?'中文':'English'}
                   <DownOutlined />
                 </Space>
               </Button>
