@@ -12,7 +12,10 @@ import {
 } from "react-router-dom";
 import { useSelector } from "../../redux/hook";
 import { useDispatch } from "react-redux";
-import { changeLanguageActionCreator } from "../../redux/language/languageAction";
+import {
+  changeLanguageActionCreator,
+  addLanguageActionCreator,
+} from "../../redux/language/languageAction";
 // const items: MenuProps["items"] = [
 //   {
 //     label: "中文",
@@ -39,8 +42,16 @@ export const Header: React.FC = () => {
       key: item.code,
     });
   });
+  itemList?.push({
+    label: "添加新语言",
+    key: "new_language",
+  });
   const handleMenuClick = (e: any) => {
-    dispath(changeLanguageActionCreator(e.key));
+    if (e.key == "new_language") {
+      dispath(addLanguageActionCreator("新语言", "new_lang"));
+    } else {
+      dispath(changeLanguageActionCreator(e.key));
+    }
   };
   return (
     <div className={styles["app-header"]}>

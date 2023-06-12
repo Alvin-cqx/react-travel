@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import store from "../../redux/store";
 import { LanguageState } from "../../redux/language/languageReducer";
+import { LanguageActionTypes } from "../../redux/language/languageAction";
 interface state extends LanguageState {}
 // const items: MenuProps["items"] = [
 //   {
@@ -35,6 +36,13 @@ class HeaderComp extends React.Component<RouteComponentProps, state> {
       language: storeState.language,
       languageList: storeState.languageList,
     };
+    // 监听store的变化进行更新
+    store.subscribe(() => {
+      const storeData = store.getState();
+      this.setState({
+        language: storeData.language,
+      });
+    });
   }
   render(): React.ReactNode {
     const { history } = this.props;
@@ -45,16 +53,22 @@ class HeaderComp extends React.Component<RouteComponentProps, state> {
         key: item.code,
       });
     });
-
+    const handleMenuClick = (e: any) => {
+      const action: LanguageActionTypes = {
+        type: "change_language",
+        payload: e.key,
+      };
+      store.dispatch(action);
+    };
     return (
       <div className={styles["app-header"]}>
         <div className={styles["top-header"]}>
           <div className={styles.inner}>
             <Typography.Text>让旅游更幸福</Typography.Text>
-            <Dropdown menu={{ items }}>
+            <Dropdown menu={{ items, onClick: handleMenuClick }}>
               <Button>
                 <Space>
-                {this.state.language==='zh'?'中文':'English'}
+                  {this.state.language === "zh" ? "中文" : "English"}
                   <DownOutlined />
                 </Space>
               </Button>
