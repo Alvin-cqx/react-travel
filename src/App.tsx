@@ -1,5 +1,6 @@
 import React from "react";
-
+import { Provider } from "react-redux";
+import store from "./redux/store";
 import styles from "./App.module.css";
 // import {
 //   Header,
@@ -12,11 +13,12 @@ import styles from "./App.module.css";
 // import { productList1, productList2,productList3} from "./mockups";
 // import sideImage from './assets/images/sider_2019_02-04.png'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { HomePage, RegisterPage, SignInPage,DetailPage} from "./pages";
+import { HomePage, RegisterPage, SignInPage, DetailPage } from "./pages";
 function App() {
   return (
-    <div className={styles.App}>
-      {/* <Header></Header>
+    <Provider store={store}>
+      <div className={styles.App}>
+        {/* <Header></Header>
       /~ 内容 ~/
       <div className={styles["page-content"]}>
         <Row gutter={16} style={{ marginTop: 20 }}>
@@ -58,20 +60,25 @@ function App() {
         ></ProductCollection>
       </div>
       <Footer></Footer>*/}
-      <BrowserRouter>
-        {/* Switch只能渲染一个路由(优先级最高的路由)，exact开启精准匹配路由模式 */}
-        <Switch>
-          {/* Route自动向组件传递history，location,match的数据 */}
-          <Route exact path="/" component={HomePage}></Route>
-          <Route exact path="/register" component={RegisterPage}></Route>
-          <Route exact path="/signIn" component={SignInPage}></Route>
-          <Route exact path="/detail/:detailId" component={DetailPage}></Route>
-          {/*   <Route path="/login" render={() => <h1>登录</h1>}></Route>
+        <BrowserRouter>
+          {/* Switch只能渲染一个路由(优先级最高的路由)，exact开启精准匹配路由模式 */}
+          <Switch>
+            {/* Route自动向组件传递history，location,match的数据 */}
+            <Route exact path="/" component={HomePage}></Route>
+            <Route exact path="/register" component={RegisterPage}></Route>
+            <Route exact path="/signIn" component={SignInPage}></Route>
+            <Route
+              exact
+              path="/detail/:detailId"
+              component={DetailPage}
+            ></Route>
+            {/*   <Route path="/login" render={() => <h1>登录</h1>}></Route>
           /~ 404页面是所有路由最后添加的 ~/
           <Route  render={() => <h1>404页面</h1>}></Route>*/}
-        </Switch>
-      </BrowserRouter>
-    </div>
+          </Switch>
+        </BrowserRouter>
+      </div>
+    </Provider>
   );
 }
 
