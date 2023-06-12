@@ -13,21 +13,12 @@ import {
 } from "react-router-dom";
 import store from "../../redux/store";
 import { LanguageState } from "../../redux/languageReducer";
-interface state extends LanguageState {}
-const items: MenuProps["items"] = [
-  {
-    label: "中文",
-    key: "1",
-  },
-  {
-    label: "英文",
-    key: "2",
-  },
-];
-interface itemType{
-  [propName:string]:any
-}
-class HeaderComp extends React.Component<RouteComponentProps, state> {
+interface State extends LanguageState {}
+
+// interface itemType{
+//   items: any[];
+// }
+class HeaderComp extends React.Component<RouteComponentProps, State> {
   constructor(props) {
     super(props);
     const storeState = store.getState();
@@ -35,18 +26,20 @@ class HeaderComp extends React.Component<RouteComponentProps, state> {
       language: storeState.language,
       languageList: storeState.languageList,
     };
-   
   }
   render(): React.ReactNode {
     const { history } = this.props;
-    let items_:itemType=[]
-    this.state.languageList.forEach((item,ind)=>{
-      items_.push({
+    let items: MenuProps["items"] = [
+    
+    ];
+    this.state.languageList.forEach((item, ind) => {
+      items?.push({
         label: item.name,
-        key:item.code,
-      }) 
-    })
-    console.log(items_,'item_listitem_listitem_list')
+        key: item.code,
+      });
+    });
+  
+
     return (
       <div className={styles["app-header"]}>
         <div className={styles["top-header"]}>

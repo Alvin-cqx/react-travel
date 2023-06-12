@@ -15,6 +15,7 @@ const defaultState: LanguageState = {
     },
   ],
 };
-export default (state=defaultState, aciont) => {
+const reducerState= (state = defaultState, action) => {
   return state;
 };
+export default reducerState;
