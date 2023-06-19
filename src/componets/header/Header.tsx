@@ -31,8 +31,8 @@ export const Header: React.FC = () => {
   // const location=useLocation()
   // const params=useParams()
   // const routeMatch=useRouteMatch()
-  const language = useSelector((state) => state.language);
-  const languageList = useSelector((state) => state.languageList);
+  const language = useSelector((state) => state.language.language);
+  const languageList = useSelector((state) => state.language.languageList);
   const dispath = useDispatch();
 
   const itemList: MenuProps["items"] = [];
@@ -47,7 +47,7 @@ export const Header: React.FC = () => {
     key: "new_language",
   });
   const handleMenuClick = (e: any) => {
-    if (e.key == "new_language") {
+    if (e.key === "new_language") {
       dispath(addLanguageActionCreator("新语言", "new_lang"));
     } else {
       dispath(changeLanguageActionCreator(e.key));

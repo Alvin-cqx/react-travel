@@ -10,8 +10,19 @@ import {
 import { Col, Row, Typography } from "antd";
 import { productList1, productList2, productList3 } from "./mockups";
 import sideImage from "../../assets/images/sider_2019_02-04.png";
+interface PropsType{
 
-export class HomePage extends React.Component {
+}
+interface State{
+  productList:any[]
+}
+export class HomePage extends React.Component<PropsType,State> {
+  constructor(props){
+    super(props)
+    this.state={
+      productList:[]
+    }
+  }
   render(): React.ReactNode {
     // console.log(this.props,'this.props')
     return (
