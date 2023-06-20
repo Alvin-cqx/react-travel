@@ -10,18 +10,31 @@ import {
 import { Col, Row, Typography } from "antd";
 import { productList1, productList2, productList3 } from "./mockups";
 import sideImage from "../../assets/images/sider_2019_02-04.png";
-interface PropsType{
-
+import { connect } from "react-redux";
+import { RootState } from "../../redux/store";
+import { giveMeDataActionCreator } from "../../redux/recommendProducts/recommendProductsAction";
+const mapStateToProps = (state: RootState) => {
+  return {
+    productList: state.recommendProducts.productList,
+    loading: state.recommendProducts.loading,
+    error: state.recommendProducts.error,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    giveMeData: () => {
+      dispatch(giveMeDataActionCreator());
+    },
+  };
+};
+type PropsType = ReturnType<typeof mapStateToProps> &
+  ReturnType<typeof mapDispatchToProps>;
+interface State {
+  productList: any[];
 }
-interface State{
-  productList:any[]
-}
-export class HomePage extends React.Component<PropsType,State> {
-  constructor(props){
-    super(props)
-    this.state={
-      productList:[]
-    }
+class HomePageComp extends React.Component<PropsType> {
+  componentDidMount() {
+    this.props.giveMeData();
   }
   render(): React.ReactNode {
     // console.log(this.props,'this.props')
@@ -73,3 +86,8 @@ export class HomePage extends React.Component<PropsType,State> {
     );
   }
 }
+
+export const HomePage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomePageComp);
