@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
+// 处理异步 createAsyncThunk
 interface ProductDetailState {
   loading: boolean;
   error: string | null;
@@ -18,7 +18,7 @@ export const productDetailSlice = createSlice({
   reducers: {
     fetchStart: (state) => {
       state.loading = true;
-    },
+    },  
     fetchSuccess: (state, action) => {
       state.data = action.payload;
       state.loading = false;
@@ -31,4 +31,8 @@ export const productDetailSlice = createSlice({
       state.error = action.payload;
     },
   },
+  // 处理createAsyncThunk异步事件
+  extraReducers:{
+
+  }
 });
