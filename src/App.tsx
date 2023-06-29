@@ -13,7 +13,7 @@ import styles from "./App.module.css";
 // import { productList1, productList2,productList3} from "./mockups";
 // import sideImage from './assets/images/sider_2019_02-04.png'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { HomePage, RegisterPage, SignInPage, DetailPage } from "./pages";
+import { HomePage, RegisterPage, SignInPage, DetailPage,SearchPage } from "./pages";
 function App() {
   return (
     <Provider store={store}>
@@ -67,6 +67,7 @@ function App() {
             <Route exact path="/" component={HomePage}></Route>
             <Route exact path="/register" component={RegisterPage}></Route>
             <Route exact path="/signIn" component={SignInPage}></Route>
+            <Route exact path="/search/:keywords?" component={SearchPage}></Route>
             <Route
               exact
               path="/detail/:detailId"

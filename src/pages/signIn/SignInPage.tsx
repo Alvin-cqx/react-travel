@@ -1,13 +1,11 @@
 import React from "react";
+import { UserLayout } from "../../layouts/userLayout";
 interface Props {}
 interface State {}
-
-export class SignInPage extends React.Component<Props, State> {
-  constructor(props: Props) {
-    console.log(props, "propspropspropsprops");
-    super(props);
-  }
-  render(): React.ReactNode {
-    return <h1>登录页面</h1>;
-  }
-}
+export const SignInPage: React.FC = (props: Props) => {
+  return (
+    <UserLayout>
+      <h1>登录页面</h1>
+    </UserLayout>
+  );
+};

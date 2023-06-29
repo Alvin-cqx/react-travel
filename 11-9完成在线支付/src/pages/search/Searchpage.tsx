@@ -21,7 +21,7 @@ export const SearchPage: React.FC = () => {
   const productList = useSelector((s) => s.productSearch.data);
 
   const dispatch = useDispatch();
-  const location = useLocation();
+  const location = useLocation(); 
 
   useEffect(() => {
     dispatch(searchProduct({ nextPage: 1, pageSize: 10, keywords }));
