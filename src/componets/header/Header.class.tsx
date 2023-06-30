@@ -107,6 +107,7 @@ import { LanguageActionTypes } from "../../redux/language/languageAction";
 import { connect } from "react-redux";
 import { RootState } from "../../redux/store";
 import { Dispatch } from "redux";
+import {userSlice} from '../../redux/user/slice'
 import {
   changeLanguageActionCreator,
 } from "../../redux/language/languageAction";
@@ -160,6 +161,7 @@ class HeaderComp extends React.Component<PropsType, state> {
     const handleMenuClick = (e: any) => {
       this.props.changeLanguage(e.key)
     };
+   
     return (
       <div className={styles["app-header"]}>
         <div className={styles["top-header"]}>
@@ -180,6 +182,7 @@ class HeaderComp extends React.Component<PropsType, state> {
               <Button value="small" onClick={() => history.push("/register")}>
                 注册
               </Button>
+             
             </Space>
           </div>
         </div>

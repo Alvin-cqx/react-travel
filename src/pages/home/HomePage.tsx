@@ -22,7 +22,7 @@ const mapStateToProps = (state: RootState) => {
     error: state.recommendProducts.error,
   };
 };
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => { 
   return {
     giveMeData: () => {
       dispatch(giveMeDataActionCreator());

@@ -16,6 +16,7 @@ import {
   changeLanguageActionCreator,
   addLanguageActionCreator,
 } from "../../redux/language/languageAction";
+import {userSlice} from '../../redux/user/slice'
 // const items: MenuProps["items"] = [
 //   {
 //     label: "中文",
@@ -53,6 +54,11 @@ export const Header: React.FC = () => {
       dispath(changeLanguageActionCreator(e.key));
     }
   };
+  const onLogout=()=>{
+    // 退出
+    dispath(userSlice.actions.logOut())
+    history.push("/")
+  }
   return (
     <div className={styles["app-header"]}>
       <div className={styles["top-header"]}>
@@ -72,6 +78,9 @@ export const Header: React.FC = () => {
             </Button>
             <Button value="small" onClick={() => history.push("/register")}>
               注册
+            </Button>
+            <Button value="small" onClick={onLogout}>
+              退出
             </Button>
           </Space>
         </div>

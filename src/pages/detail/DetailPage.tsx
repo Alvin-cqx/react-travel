@@ -6,13 +6,13 @@ import { useSelector } from "../../redux/hook";
 import { productDetailSlice ,getProductDetail} from "../../redux/productDetail/slice";
 import {useDispatch} from 'react-redux'
 interface MatchParams {
-  detailId: string;
+  productId : string;
 }
 export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (
   props
 ) => {
   //useParams 返回URL参数的键/值对的对象
-  const { detailId } = useParams<MatchParams>();
+  const { productId } = useParams<MatchParams>();
   // 方法1：
   // const [loading, setLoading] = useState<boolean>(true);
   // const [product, setProduct] = useState<any>(null);
@@ -46,13 +46,13 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (
       //    // 方法2
       //    dispacth(productDetailSlice.actions.fetchFail('error.msg'))
       // }
-      dispacth(getProductDetail(detailId))
+      dispacth(getProductDetail(productId))
     };
     fetchData();
   },[]);
   return (
     <h1>
-      路由详情页，id:{props.match.params.detailId}:{detailId}
+      路由详情页，id:{props.match.params.productId}:{productId}
       {/* 渲染html */}
       {/* <div
           dangerouslySetInnerHTML={{ __html: product.features }}
