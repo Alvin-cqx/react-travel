@@ -10,7 +10,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { productDetailSlice } from "./productDetail/slice";
 import { productSearchSlice } from "./productSearch/slice";
 import { userSlice } from "./user/slice";
-
+import {shoppingCartSlice} from './shoppingCart/slice'
 // redux 持久化
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -25,6 +25,7 @@ const rootReducer = combineReducers({
   productDetail: productDetailSlice.reducer,
   productSearch: productSearchSlice.reducer,
   user: userSlice.reducer,
+  shoppingCart:shoppingCartSlice.reducer,
 });
 
 //创建持久化的配置persist的信息

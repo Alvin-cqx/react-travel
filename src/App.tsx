@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Provider } from "react-redux";
 import rootStore from "./redux/store";
 import styles from "./App.module.css";
@@ -22,6 +22,8 @@ import {
   shoppingCart,
 } from "./pages";
 import { useSelector } from "./redux/hook";
+import { getShoppingCart } from "./redux/shoppingCart/slice";
+import { useDispatch } from "react-redux";
 // redux持久化
 import { PersistGate } from "redux-persist/lib/integration/react";
 // 路由私有化
@@ -38,6 +40,12 @@ const PrivateRoute = ({ component, isAuthenticated, ...rest }) => {
 
 function App() {
   const token = useSelector((s) => s.user.token);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (token) {
+      dispatch(getShoppingCart(token));
+    }
+  }, [token]);
   return (
     <Provider store={rootStore.store}>
       <PersistGate loading={null} persistor={rootStore.persistor}>

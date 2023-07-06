@@ -3,10 +3,15 @@ import styles from "./DetailPage.module.css";
 import { RouteComponentProps, useParams } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "../../redux/hook";
-import { productDetailSlice ,getProductDetail} from "../../redux/productDetail/slice";
-import {useDispatch} from 'react-redux'
+import { Button } from "antd";
+import {
+  productDetailSlice,
+  getProductDetail,
+} from "../../redux/productDetail/slice";
+import { addShoppingCartItem } from "../../redux/shoppingCart/slice";
+import { useDispatch } from "react-redux";
 interface MatchParams {
-  productId : string;
+  productId: string;
 }
 export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (
   props
@@ -17,13 +22,13 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (
   // const [loading, setLoading] = useState<boolean>(true);
   // const [product, setProduct] = useState<any>(null);
   // const [error, setError] = useState<string | null>(null);
-
+  const token = useSelector((s) => s.user.token) as string; //强行转换string类型
 
   // 方法2 数据转移到redux中
   const loading = useSelector((state) => state.productDetail.loading);
   const product = useSelector((state) => state.productDetail.data);
   const error = useSelector((state) => state.productDetail.error);
-  const dispacth=useDispatch()
+  const dispacth = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
       // try {
@@ -46,14 +51,22 @@ export const DetailPage: React.FC<RouteComponentProps<MatchParams>> = (
       //    // 方法2
       //    dispacth(productDetailSlice.actions.fetchFail('error.msg'))
       // }
-      dispacth(getProductDetail(productId))
+      dispacth(getProductDetail(productId));
     };
     fetchData();
-  },[]);
+  }, []);
   return (
     <h1>
       路由详情页，id:{props.match.params.productId}:{productId}
-      {/* 渲染html */}
+      <Button
+        value="small"
+        onClick={() => {
+          dispacth(addShoppingCartItem({jwt:token, touristRouteId:productId}));
+        }}
+      >
+        加入购物车
+      </Button>
+      {/* 渲染html */}  
       {/* <div
           dangerouslySetInnerHTML={{ __html: product.features }}
           style={{ margin: 50 }}

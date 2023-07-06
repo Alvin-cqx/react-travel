@@ -17,6 +17,8 @@ import {
   addLanguageActionCreator,
 } from "../../redux/language/languageAction";
 import {userSlice} from '../../redux/user/slice'
+
+
 // const items: MenuProps["items"] = [
 //   {
 //     label: "中文",
@@ -34,6 +36,10 @@ export const Header: React.FC = () => {
   // const routeMatch=useRouteMatch()
   const language = useSelector((state) => state.language.language);
   const languageList = useSelector((state) => state.language.languageList);
+  // 获取购物车数据
+  const shoppingCartItem=useSelector((s)=>s.shoppingCart.items)
+  const shoppingCartLoading=useSelector((s)=>s.shoppingCart.loading)
+
   const dispath = useDispatch();
 
   const itemList: MenuProps["items"] = [];
